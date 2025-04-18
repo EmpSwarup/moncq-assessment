@@ -21,8 +21,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  Sector,
 } from "recharts";
 import { cn } from "@/src/lib/utils";
 
@@ -69,9 +67,16 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index,
   name,
-}: any) => {
+}: {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  percent: number;
+  name: string;
+}) => {
   const RADIAN = Math.PI / 180;
   const radius = innerRadius + (outerRadius - innerRadius) * 1.1;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -93,6 +98,7 @@ const renderCustomizedLabel = ({
 
 export default function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState("year");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [salesChartGranularity, setSalesChartGranularity] = useState("Monthly");
 
   const getFilterButtonClasses = (filterName: string): string => {
